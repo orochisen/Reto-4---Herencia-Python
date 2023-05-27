@@ -1,0 +1,132 @@
+class Entregable:
+    def entregar(self):
+        self.entregado = True
+
+    def devolver(self):
+        self.entregado = False
+
+    def isEntregado(self):
+        return self.entregado
+
+
+class Serie(Entregable):  # Agregamos la superclase Entregable
+    def __init__(self, titulo, genero, creador, num_temporadas=3):
+        self.titulo = titulo
+        self.num_temporadas = num_temporadas
+        self.entregado = False
+        self.genero = genero
+        self.creador = creador
+
+    def get_titulo(self):
+        return self.titulo
+
+    def get_num_temporadas(self):
+        return self.num_temporadas
+
+    def get_genero(self):
+        return self.genero
+
+    def get_creador(self):
+        return self.creador
+
+    def set_titulo(self, titulo):
+        self.titulo = titulo
+
+    def set_num_temporadas(self, num_temporadas):
+        self.num_temporadas = num_temporadas
+
+    def set_genero(self, genero):
+        self.genero = genero
+
+    def set_creador(self, creador):
+        self.creador = creador
+
+    def __str__(self):
+        return f"Título: {self.titulo}, Temporadas: {self.num_temporadas}, Género: {self.genero}, Creador: {self.creador}"
+
+
+class Videojuego(Entregable):  # Agregamos la superclase Entregable
+    def __init__(self, titulo, genero, compañia, horas_estimadas=10):
+        self.titulo = titulo
+        self.horas_estimadas = horas_estimadas
+        self.entregado = False
+        self.genero = genero
+        self.compañia = compañia
+
+    def get_titulo(self):
+        return self.titulo
+
+    def get_horas_estimadas(self):
+        return self.horas_estimadas
+
+    def get_genero(self):
+        return self.genero
+
+    def get_compañia(self):
+        return self.compañia
+
+    def set_titulo(self, titulo):
+        self.titulo = titulo
+
+    def set_horas_estimadas(self, horas_estimadas):
+        self.horas_estimadas = horas_estimadas
+
+    def set_genero(self, genero):
+        self.genero = genero
+
+    def set_compañia(self, compañia):
+        self.compañia = compañia
+
+    def __str__(self):
+        return f"Título: {self.titulo}, Horas estimadas: {self.horas_estimadas}, Género: {self.genero}, Compañía: {self.compañia}"
+
+
+# 1.crea 2 arrays de series y videojuegos de 5 posiciones
+series = [
+    Serie("Game of Thrones", "Fantasy", "David Benioff, D.B. Weiss", 8),
+    Serie("Breaking Bad", "Drama", "Vince Gilligan", 5),
+    Serie("Stranger Things", "Sci-Fi", "The Duffer Brothers", 4),
+    Serie("Friends", "Comedy", "David Crane, Marta Kauffman", 10),
+    Serie("The Crown", "Drama", "Peter Morgan")
+]
+
+videojuegos = [
+    Videojuego("The Legend of Zelda: Breath of the Wild", "Action-Adventure", "Nintendo", 50),
+    Videojuego("Red Dead Redemption 2", "Action-Adventure", "Rockstar Games"),
+    Videojuego("The Witcher 3: Wild Hunt", "Action RPG", "CD Projekt", 60),
+    Videojuego("Super Mario Odyssey", "Platformer", "Nintendo", 15),
+    Videojuego("Grand Theft Auto V", "Action-Adventure", "Rockstar Games")
+]
+
+# Entrega algunos videojuegos y series
+videojuegos[0].entregar()
+videojuegos[3].entregar()
+series[2].entregar()
+series[4].entregar()
+
+# Contar series y videojuegos entregados
+num_series_entregadas = sum(1 for serie in series if serie.isEntregado())
+num_videojuegos_entregados = sum(1 for videojuego in videojuegos if videojuego.isEntregado())
+
+print(f"Series entregadas: {num_series_entregadas}")
+print(f"Videojuegos entregados: {num_videojuegos_entregados}")
+
+# Devolver los videojuegos entregados
+for videojuego in videojuegos:
+    if videojuego.isEntregado():
+        videojuego.devolver()
+
+# Devolver las series entregadas
+for serie in series:
+    if serie.isEntregado():
+        serie.devolver()
+
+# Encontrar el videojuego con más horas estimadas
+max_horas_estimadas = max(videojuegos, key=lambda x: x.get_horas_estimadas())
+print("Videojuego con más horas estimadas:")
+print(max_horas_estimadas)
+
+# Encontrar la serie con más temporadas
+max_temporadas = max(series, key=lambda x: x.get_num_temporadas())
+print("Serie con más temporadas:")
+print(max_temporadas)
